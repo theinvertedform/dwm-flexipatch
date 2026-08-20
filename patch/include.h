@@ -24,6 +24,9 @@
 #if BAR_HOLDBAR_PATCH
 #include "bar_holdbar.h"
 #endif
+#if BAR_LAUNCHER_PATCH
+#include "bar_launcher.h"
+#endif
 #if BAR_LTSYMBOL_PATCH
 #include "bar_ltsymbol.h"
 #endif
@@ -101,6 +104,9 @@
 #if ALT_TAB_PATCH
 #include "alttab.h"
 #endif
+#if ALWAYSONTOP_PATCH
+#include "alwaysontop.h"
+#endif
 #if ASPECTRESIZE_PATCH
 #include "aspectresize.h"
 #endif
@@ -109,6 +115,12 @@
 #endif
 #if AUTOSTART_PATCH
 #include "autostart.h"
+#endif
+#if BANISH_PATCH || PLACEMOUSE_PATCH
+#include "recttoclient.h"
+#endif
+#if BANISH_PATCH
+#include "banish.h"
 #endif
 #if CFACTS_PATCH
 #include "cfacts.h"
@@ -130,6 +142,9 @@
 #endif
 #if DRAGCFACT_PATCH && CFACTS_PATCH
 #include "dragcfact.h"
+#endif
+#if DRAGFACT_PATCH && CFACTS_PATCH
+#include "dragfact.h"
 #endif
 #if DRAGMFACT_PATCH
 #include "dragmfact.h"
@@ -154,7 +169,10 @@
 #if FOCUSADJACENTTAG_PATCH
 #include "focusadjacenttag.h"
 #endif
-#if FOCUSMASTER_PATCH
+#if FOCUSFOLLOWMOUSE_PATCH
+#include "focusfollowmouse.h"
+#endif
+#if FOCUSMASTER_PATCH || FOCUSMASTER_RETURN_PATCH
 #include "focusmaster.h"
 #endif
 #if FOCUSURGENT_PATCH
@@ -162,6 +180,9 @@
 #endif
 #if FULLSCREEN_PATCH
 #include "fullscreen.h"
+#endif
+#if GAMES_PATCH
+#include "games.h"
 #endif
 #if INPLACEROTATE_PATCH
 #include "inplacerotate.h"
@@ -186,6 +207,9 @@
 #if MPDCONTROL_PATCH
 #include "mpdcontrol.h"
 #endif
+#if MOVECENTER_PATCH
+#include "movecenter.h"
+#endif
 #if MOVEPLACE_PATCH
 #include "moveplace.h"
 #endif
@@ -203,6 +227,9 @@
 #endif
 #if PERTAG_PATCH
 #include "pertag.h"
+#endif
+#if PLACEDIR_PATCH
+#include "placedir.h"
 #endif
 #if PLACEMOUSE_PATCH
 #include "placemouse.h"
@@ -312,6 +339,9 @@
 #if TOGGLEFULLSCREEN_PATCH
 #include "togglefullscreen.h"
 #endif
+#if TOGGLETOPBAR_PATCH
+#include "toggletopbar.h"
+#endif
 #if TRANSFER_PATCH
 #include "transfer.h"
 #endif
@@ -336,7 +366,9 @@
 #if XKB_PATCH
 #include "xkb.h"
 #endif
-#if XRDB_PATCH && !BAR_VTCOLORS_PATCH
+#if XRESOURCES_PATCH
+#include "xresources.h"
+#elif XRDB_PATCH
 #include "xrdb.h"
 #endif
 /* Layouts */

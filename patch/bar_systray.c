@@ -1,5 +1,6 @@
 static Systray *systray = NULL;
 static unsigned long systrayorientation = _NET_SYSTEM_TRAY_ORIENTATION_HORZ;
+static int refresh_systray_icons = 0;
 
 int
 width_systray(Bar *bar, BarArg *a)
@@ -87,12 +88,21 @@ draw_systray(Bar *bar, BarArg *a)
 		XMapRaised(dpy, i->win);
 		i->x = w;
 		XMoveResizeWindow(dpy, i->win, i->x, 0, i->w, i->h);
+		if (refresh_systray_icons)
+			XClearArea(dpy, i->win, 0, 0, 0, 0, True);
 		w += i->w;
 		if (i->next)
 			w += systrayspacing;
 		if (i->mon != bar->mon)
 			i->mon = bar->mon;
 	}
+	refresh_systray_icons = 0;
+
+	#if !BAR_ALPHA_PATCH
+	wa.background_pixel = scheme[SchemeNorm][ColBg].pixel;
+	XChangeWindowAttributes(dpy, systray->win, CWBackPixel, &wa);
+	XClearWindow(dpy, systray->win);
+	#endif // BAR_ALPHA_PATCH
 
 	XMoveResizeWindow(dpy, systray->win, bar->bx + a->x + lrpad / 2, (w ? bar->by + a->y + (a->h - systray->h) / 2: -systray->h), MAX(w, 1), systray->h);
 	return w;
@@ -114,6 +124,7 @@ removesystrayicon(Client *i)
 	for (ii = &systray->icons; *ii && *ii != i; ii = &(*ii)->next);
 	if (ii)
 		*ii = i->next;
+	refresh_systray_icons = 1;
 	XReparentWindow(dpy, i->win, root, 0, 0);
 	free(i);
 	drawbarwin(systray->bar);

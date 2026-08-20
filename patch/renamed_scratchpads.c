@@ -17,19 +17,6 @@ setscratch(const Arg *arg)
 	c->scratchkey = ((char**)arg->v)[0][0];
 }
 
-void spawnscratch(const Arg *arg)
-{
-	if (fork() == 0) {
-		if (dpy)
-			close(ConnectionNumber(dpy));
-		setsid();
-		execvp(((char **)arg->v)[1], ((char **)arg->v)+1);
-		fprintf(stderr, "dwm: execvp %s", ((char **)arg->v)[1]);
-		perror(" failed");
-		exit(EXIT_SUCCESS);
-	}
-}
-
 void
 togglescratch(const Arg *arg)
 {
@@ -66,12 +53,13 @@ togglescratch(const Arg *arg)
 			if (c->scratchkey != ((char**)arg->v)[0][0])
 				continue;
 
-			/* awesomebar / wintitleactions compatibility, unhide scratchpad if hidden
+			#if BAR_WINTITLEACTIONS_PATCH
+			/* unhide scratchpad if hidden */
 			if (HIDDEN(c)) {
 				XMapWindow(dpy, c->win);
 				setclientstate(c, NormalState);
 			}
-			*/
+			#endif // BAR_WINTITLEACTIONS_PATCH
 
 			/* Record the first found scratchpad client for focus purposes, but prioritise the
 			   scratchpad on the current monitor if one exists */
@@ -145,7 +133,6 @@ togglescratch(const Arg *arg)
 		if (found->isfloating)
 			XRaiseWindow(dpy, found->win);
 	} else {
-		spawnscratch(arg);
+		spawn(&(Arg){ .v = (const void *)(((char * const *)arg->v) + 1) });
 	}
 }
-

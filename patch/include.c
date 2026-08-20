@@ -21,6 +21,9 @@
 #if COMBO_PATCH
 #include "combo.c"
 #endif
+#if BAR_LAUNCHER_PATCH
+#include "bar_launcher.c"
+#endif
 #if BAR_LTSYMBOL_PATCH
 #include "bar_ltsymbol.c"
 #endif
@@ -101,6 +104,9 @@
 #if ALT_TAB_PATCH
 #include "alttab.c"
 #endif
+#if ALWAYSONTOP_PATCH
+#include "alwaysontop.c"
+#endif
 #if ASPECTRESIZE_PATCH
 #include "aspectresize.c"
 #endif
@@ -109,6 +115,12 @@
 #endif
 #if AUTOSTART_PATCH
 #include "autostart.c"
+#endif
+#if BANISH_PATCH || PLACEMOUSE_PATCH
+#include "recttoclient.c"
+#endif
+#if BANISH_PATCH
+#include "banish.c"
 #endif
 #if CFACTS_PATCH
 #include "cfacts.c"
@@ -131,6 +143,9 @@
 #if DRAGCFACT_PATCH && CFACTS_PATCH
 #include "dragcfact.c"
 #endif
+#if DRAGFACT_PATCH && CFACTS_PATCH
+#include "dragfact.c"
+#endif
 #if DWMC_PATCH
 #include "dwmc.c"
 #elif FSIGNAL_PATCH
@@ -151,7 +166,10 @@
 #if FOCUSDIR_PATCH
 #include "focusdir.c"
 #endif
-#if FOCUSMASTER_PATCH
+#if FOCUSFOLLOWMOUSE_PATCH
+#include "focusfollowmouse.c"
+#endif
+#if FOCUSMASTER_PATCH || FOCUSMASTER_RETURN_PATCH
 #include "focusmaster.c"
 #endif
 #if FOCUSURGENT_PATCH
@@ -159,6 +177,9 @@
 #endif
 #if FULLSCREEN_PATCH
 #include "fullscreen.c"
+#endif
+#if GAMES_PATCH
+#include "games.c"
 #endif
 #if INPLACEROTATE_PATCH
 #include "inplacerotate.c"
@@ -187,6 +208,9 @@
 #if MPDCONTROL_PATCH
 #include "mpdcontrol.c"
 #endif
+#if MOVECENTER_PATCH
+#include "movecenter.c"
+#endif
 #if MOVEPLACE_PATCH
 #include "moveplace.c"
 #endif
@@ -204,6 +228,9 @@
 #endif
 #if PERTAG_PATCH
 #include "pertag.c"
+#endif
+#if PLACEDIR_PATCH
+#include "placedir.c"
 #endif
 #if PLACEMOUSE_PATCH
 #include "placemouse.c"
@@ -310,6 +337,9 @@
 #if TOGGLEFULLSCREEN_PATCH
 #include "togglefullscreen.c"
 #endif
+#if TOGGLETOPBAR_PATCH
+#include "toggletopbar.c"
+#endif
 #if TRANSFER_PATCH
 #include "transfer.c"
 #endif
@@ -334,7 +364,9 @@
 #if XKB_PATCH
 #include "xkb.c"
 #endif
-#if XRDB_PATCH && !BAR_VTCOLORS_PATCH
+#if XRESOURCES_PATCH
+#include "xresources.c"
+#elif XRDB_PATCH
 #include "xrdb.c"
 #endif
 #if DRAGMFACT_PATCH
